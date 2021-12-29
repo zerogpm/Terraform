@@ -26,3 +26,4 @@ resource "docker_container" "nodered_container" {
     external = var.external_port
   }
 }
+
