@@ -9,6 +9,12 @@ terraform {
 
 provider "docker" {}
 
+resource "null_resource" "dockervol" {
+  provisioner "local-exec" {
+    command = "mkdir noderedvol/ || true && sudo chown -R 1000:1000 noderedvol/"
+  }
+}
+
 resource "random_uuid" "random" {
   count = var.count_num
 }
@@ -24,6 +30,10 @@ resource "docker_container" "nodered_container" {
   ports {
     internal = 1880
     external = var.external_port
+  }
+  volumes {
+    container_path = "/data"
+    host_path = "/home/chris/code/Terraform/terraform-docker/noderedvol"
   }
 }
 
