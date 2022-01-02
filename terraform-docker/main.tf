@@ -20,7 +20,7 @@ resource "random_uuid" "random" {
 }
 
 resource "docker_image" "nodered_image" {
-  name = "nodered/node-red:latest"
+  name = lookup(var.image, var.env)
 }
 
 resource "docker_container" "nodered_container" {
