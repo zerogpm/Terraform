@@ -33,7 +33,7 @@ resource "docker_container" "nodered_container" {
   }
   volumes {
     container_path = "/data"
-    host_path = "/home/chris/code/Terraform/terraform-docker/noderedvol"
+    host_path = "${path.cwd}/noderedvol"
   }
 }
 
