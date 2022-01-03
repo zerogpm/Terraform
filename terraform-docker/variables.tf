@@ -17,10 +17,10 @@ variable "external_port" {
   type        = list
   description = "description"
   
-#  validation {
-#    condition = var.external_port <= 65535 && var.external_port > 0
-#    error_message = "The internal port must be range."
-#  }
+  validation {
+    condition = max(var.external_port...) <= 65535 && min(var.external_port...) > 0
+    error_message = "The internal port must be range."
+  }
 }
 
 locals {
