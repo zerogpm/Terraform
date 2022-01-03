@@ -14,17 +14,16 @@ variable "image" {
 }
 
 variable "external_port" {
-  type        = number
+  type        = list
   description = "description"
   
-  validation {
-    condition = var.external_port <= 65535 && var.external_port > 0
-    error_message = "The internal port must be range."
-  }
+#  validation {
+#    condition = var.external_port <= 65535 && var.external_port > 0
+#    error_message = "The internal port must be range."
+#  }
 }
 
-variable "count_num" {
-  type        = number
-  default     = 1
-  description = "description"
+locals {
+  container_count = length(var.external_port)
 }
+

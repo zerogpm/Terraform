@@ -16,7 +16,7 @@ resource "null_resource" "dockervol" {
 }
 
 resource "random_uuid" "random" {
-  count = var.count_num
+  count = local.container_count
 }
 
 resource "docker_image" "nodered_image" {
@@ -24,12 +24,12 @@ resource "docker_image" "nodered_image" {
 }
 
 resource "docker_container" "nodered_container" {
-  count = var.count_num
+  count = local.container_count
   name  = join("-", ["nodered", random_uuid.random[count.index].result])
   image = docker_image.nodered_image.latest
   ports {
     internal = 1880
-    external = var.external_port
+    external = var.external_port[count.index]
   }
   volumes {
     container_path = "/data"
