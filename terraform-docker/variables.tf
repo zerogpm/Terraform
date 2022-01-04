@@ -1,9 +1,3 @@
-variable "env" {
-  type = string
-  description = "Env to deploy to"
-  default = "dev"
-}
-
 variable "image" {
   type = map
   description = "image for container"
@@ -29,6 +23,6 @@ variable "external_port" {
 }
 
 locals {
-  container_count = length(lookup(var.external_port, var.env))
+  container_count = length(var.external_port[terraform.workspace])
 }
 
