@@ -10,6 +10,7 @@ resource "random_uuid" "random" {
 
 module "image" {
   source = "./image"
+  image_in = var.image[terraform.workspace]
 }
 
 resource "docker_container" "nodered_container" {
