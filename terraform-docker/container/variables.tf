@@ -17,3 +17,7 @@ variable "ext_port_in" {
 variable "container_path_in" {
   description = "container path"
 }
+
+variable "count_in" {
+  description = ""
+}

@@ -28,7 +28,3 @@ variable "external_port" {
 #  }
 }
 
-#locals {
-#  container_count = length(var.external_port[terraform.workspace])
-#}
-
