@@ -7,3 +7,7 @@
 #  value = module.container[*].container-name
 #  description = "The name of the container"
 #}
+
+output "application_access" {
+  value = [for x in module.container[*]: x]
+}
