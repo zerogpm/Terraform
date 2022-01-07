@@ -1,5 +1,5 @@
 variable "image" {
-  type = map
+  type = map(any)
   description = "image for container"
   default = {
     nodered = {
@@ -14,21 +14,21 @@ variable "image" {
 }
 
 variable "external_port" {
-  type        = map
+  type        = map(any)
   description = "description"
   
-  validation {
-    condition = max(var.external_port["dev"]...) <= 65535 && min(var.external_port["dev"]...) >= 1980
-    error_message = "The internal port must be range."
-  }
-
-  validation {
-    condition = max(var.external_port["prod"]...) <= 1980 && min(var.external_port["prod"]...) >= 1880
-    error_message = "The internal port must be range."
-  }
+#  validation {
+#    condition = max(var.external_port["dev"]...) <= 65535 && min(var.external_port["dev"]...) >= 1980
+#    error_message = "The internal port must be range."
+#  }
+#
+#  validation {
+#    condition = max(var.external_port["prod"]...) <= 1980 && min(var.external_port["prod"]...) >= 1880
+#    error_message = "The internal port must be range."
+#  }
 }
 
-locals {
-  container_count = length(var.external_port[terraform.workspace])
-}
+#locals {
+#  container_count = length(var.external_port[terraform.workspace])
+#}
 
