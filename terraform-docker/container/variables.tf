@@ -14,10 +14,8 @@ variable "ext_port_in" {
   description = "ext_port_in ports"
 }
 
-variable "container_path_in" {
-  description = "container path"
-}
-
 variable "count_in" {
   description = ""
 }
+
+variable "volumes_in" {}
