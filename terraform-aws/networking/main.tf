@@ -26,3 +26,14 @@ resource "aws_subnet" "bu-public_subnet" {
     Name = "bu_public_${count.index + 1}"
   }
 }
+
+resource "aws_subnet" "bu-private_subnet" {
+  count = length(var.private_cidrs)
+  cidr_block = var.private_cidrs[count.index]
+  vpc_id     = aws_vpc.bu_vpc.id
+  availability_zone = ["us-east-1c", "us-east-1d", "us-east-1e"][count.index]
+
+  tags = {
+    Name = "bu_private_${count.index + 1}"
+  }
+}
