@@ -8,7 +8,7 @@ resource "random_integer" "random" {
 }
 
 resource "random_shuffle" "az_list" {
-  input = data.aws_availability_zones.available.names
+  input        = data.aws_availability_zones.available.names
   result_count = var.max_subnets
 }
 
@@ -38,9 +38,9 @@ resource "aws_subnet" "bu-public_subnet" {
 }
 
 resource "aws_subnet" "bu-private_subnet" {
-  count = var.private_sn_count
-  cidr_block = var.private_cidrs[count.index]
-  vpc_id     = aws_vpc.bu_vpc.id
+  count             = var.private_sn_count
+  cidr_block        = var.private_cidrs[count.index]
+  vpc_id            = aws_vpc.bu_vpc.id
   availability_zone = random_shuffle.az_list.result[count.index]
 
   tags = {
@@ -50,6 +50,9 @@ resource "aws_subnet" "bu-private_subnet" {
 
 resource "aws_internet_gateway" "bu-Internet_gateway" {
   vpc_id = aws_vpc.bu_vpc.id
+  depends_on = [
+    aws_vpc.bu_vpc
+  ]
   tags = {
     Name = "bu-IGW"
   }
@@ -63,15 +66,15 @@ resource "aws_route_table" "bu-public_rt" {
 }
 
 resource "aws_route_table_association" "bu_public_assoc" {
-  count = var.public_sn_count
-  subnet_id = aws_subnet.bu-public_subnet[count.index].id
+  count          = var.public_sn_count
+  subnet_id      = aws_subnet.bu-public_subnet[count.index].id
   route_table_id = aws_route_table.bu-public_rt.id
 }
 
 resource "aws_route" "default_route" {
-  route_table_id = aws_route_table.bu-public_rt.id
+  route_table_id         = aws_route_table.bu-public_rt.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id = aws_internet_gateway.bu-Internet_gateway.id
+  gateway_id             = aws_internet_gateway.bu-Internet_gateway.id
 }
 
 resource "aws_default_route_table" "bu-private-rt" {
