@@ -44,3 +44,36 @@ resource "aws_subnet" "bu-private_subnet" {
     Name = "bu_private_${count.index + 1}"
   }
 }
+
+resource "aws_internet_gateway" "bu-Internet_gateway" {
+  vpc_id = aws_vpc.bu_vpc.id
+  tags = {
+    Name = "bu-IGW"
+  }
+}
+
+resource "aws_route_table" "bu-public_rt" {
+  vpc_id = aws_vpc.bu_vpc.id
+  tags = {
+    Name = "public-route-table"
+  }
+}
+
+resource "aws_route_table_association" "bu_public_assoc" {
+  count = var.public_sn_count
+  subnet_id = aws_subnet.bu-public_subnet[count.index].id
+  route_table_id = aws_route_table.bu-public_rt.id
+}
+
+resource "aws_route" "default_route" {
+  route_table_id = aws_route_table.bu-public_rt.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.bu-Internet_gateway.id
+}
+
+resource "aws_default_route_table" "bu-private-rt" {
+  default_route_table_id = aws_vpc.bu_vpc.default_route_table_id
+  tags = {
+    Name = "bu_private_route_table"
+  }
+}
