@@ -16,6 +16,9 @@ resource "aws_vpc" "bu_vpc" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
   enable_dns_support   = true
+  lifecycle {
+    create_before_destroy = true
+  }
 
   tags = {
     Name = "bu_vpc-${random_integer.random.id}"
@@ -55,7 +58,7 @@ resource "aws_internet_gateway" "bu-Internet_gateway" {
 resource "aws_route_table" "bu-public_rt" {
   vpc_id = aws_vpc.bu_vpc.id
   tags = {
-    Name = "public-route-table"
+    Name = "bu-public-route-table"
   }
 }
 
@@ -74,6 +77,6 @@ resource "aws_route" "default_route" {
 resource "aws_default_route_table" "bu-private-rt" {
   default_route_table_id = aws_vpc.bu_vpc.default_route_table_id
   tags = {
-    Name = "bu_private_route_table"
+    Name = "bu-private-route-table"
   }
 }
