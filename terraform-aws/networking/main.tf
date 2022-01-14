@@ -85,14 +85,18 @@ resource "aws_default_route_table" "bu-private-rt" {
 }
 
 resource "aws_security_group" "bu_sg" {
-  name        = "public_sg"
-  description = "security group for public Access"
+  for_each    = var.security_groups
+  name        = each.value.name
+  description = each.value.description
   vpc_id      = aws_vpc.bu_vpc.id
-  ingress {
-    from_port   = 22
-    protocol    = "tcp"
-    to_port     = 22
-    cidr_blocks = [var.access_ip]
+  dynamic "ingress" {
+    for_each = each.value.ingress
+    content {
+      from_port   = ingress.value.from
+      protocol    = ingress.value.protocol
+      to_port     = ingress.value.to
+      cidr_blocks = ingress.value.cidr_blocks
+    }
   }
 
   egress {
