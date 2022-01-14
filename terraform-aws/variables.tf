@@ -15,3 +15,5 @@ variable "profile" {
 variable "access_ip" {
   type = string
 }
+
+variable "my_personal_ip" {}
