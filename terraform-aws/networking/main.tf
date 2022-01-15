@@ -21,7 +21,7 @@ resource "aws_vpc" "bu_vpc" {
   }
 
   tags = {
-    Name = "bu_vpc-${random_integer.random.id}"
+    Name = "bu-vpc-${random_integer.random.id}"
   }
 }
 
@@ -33,7 +33,7 @@ resource "aws_subnet" "bu-public_subnet" {
   availability_zone       = random_shuffle.az_list.result[count.index]
 
   tags = {
-    Name = "bu_public_${count.index + 1}"
+    Name = "bu-public-${count.index + 1}"
   }
 }
 
@@ -44,7 +44,7 @@ resource "aws_subnet" "bu-private_subnet" {
   availability_zone = random_shuffle.az_list.result[count.index]
 
   tags = {
-    Name = "bu_private_${count.index + 1}"
+    Name = "bu-private-${count.index + 1}"
   }
 }
 
@@ -104,5 +104,14 @@ resource "aws_security_group" "bu_sg" {
     protocol    = "-1"
     to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_db_subnet_group" "bu-rds-subnet-group" {
+  count      = var.rds_subnet_groups == true ? 1 : 0
+  name       = "bu-rds-subnet-group"
+  subnet_ids = aws_subnet.bu-private_subnet.*.id
+  tags = {
+    Name = "bu-rds-sg"
   }
 }

@@ -30,3 +30,7 @@ variable "access_ip" {
 
 variable "security_groups" {
 }
+
+variable "rds_subnet_groups" {
+  type = bool
+}
