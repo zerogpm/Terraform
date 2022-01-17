@@ -17,3 +17,17 @@ variable "access_ip" {
 }
 
 variable "my_personal_ip" {}
+
+variable "dbname" {
+  type = string
+}
+
+variable "dbuser" {
+  type = string
+  sensitive = true
+}
+
+variable "dbpassword" {
+  type = string
+  sensitive = true
+}
