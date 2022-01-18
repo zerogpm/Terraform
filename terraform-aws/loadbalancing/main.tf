@@ -19,3 +19,12 @@ resource "aws_lb_target_group" "bu-tg" {
     interval            = var.lb_interval
   }
 }
+
+resource "aws_lb_listener" "bu-lb-listener" {
+  load_balancer_arn = aws_lb.bu-alb.arn
+  port              = var.listener_port
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.bu-tg.arn
+  }
+}
