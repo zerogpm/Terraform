@@ -9,6 +9,10 @@ resource "aws_lb" "bu-alb" {
 
 resource "aws_lb_target_group" "bu-tg" {
   name     = "bu-lb-tg-${substr(uuid(), 0, 5)}"
+  lifecycle {
+    ignore_changes = [name]
+    create_before_destroy = true
+  }
   port     = var.tg_port
   protocol = var.tg_protocol
   vpc_id   = var.vpc_id
