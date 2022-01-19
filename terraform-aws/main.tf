@@ -50,5 +50,5 @@ module "compute" {
   public_sg       = module.networking.public_sg
   vol_size        = 10
   key_name        = "remote-key"
-  public_key_path = "/home/chris/.ssh/remote-key.pub"
+  public_key_path = var.public_key_path
 }
