@@ -43,10 +43,12 @@ module "loadbalancing" {
 }
 
 module "compute" {
-  source = "./compute"
-  instance_count = 1
-  instance_type = "t3.micro"
-  public_subnets = module.networking.public_subnets
-  public_sg = module.networking.public_sg
-  vol_size = 10
+  source          = "./compute"
+  instance_count  = 1
+  instance_type   = "t3.micro"
+  public_subnets  = module.networking.public_subnets
+  public_sg       = module.networking.public_sg
+  vol_size        = 10
+  key_name        = "remote-key"
+  public_key_path = "/home/chris/.ssh/remote-key.pub"
 }
