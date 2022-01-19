@@ -12,6 +12,9 @@ data "aws_ami" "server-ami" {
 resource "random_id" "bu-node-id" {
   byte_length = 2
   count       = var.instance_count
+  keepers = {
+    key_name = var.key_name
+  }
 }
 
 resource "aws_key_pair" "bu-key" {
