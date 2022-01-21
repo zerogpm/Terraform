@@ -11,3 +11,4 @@ variable "db_endpoint" {}
 variable "dbuser" {}
 variable "dbpassword" {}
 variable "dbname" {}
+variable "lb_target_group_arn" {}
