@@ -3,11 +3,11 @@ module "vpc" {
   version = "3.11.3"
   # insert the 23 required variables here
   name = "vpc-dev"
-  cidr = "10.0.0.0/16"
+  cidr = var.vpc_cider
 
   azs             = ["us-east-1a", "us-east-1b"]
-  private_subnets = [for i in range(1, 3, 1) : cidrsubnet("10.0.0.0/16", 8, i)]
-  public_subnets  = [for i in range(101, 103, 1) : cidrsubnet("10.0.0.0/16", 8, i)]
+  private_subnets = var.private_subnets
+  public_subnets  = var.public_subnets
 
   #Nat GateWays
   enable_nat_gateway = true
