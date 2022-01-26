@@ -13,3 +13,5 @@ variable "profile" {
 }
 
 variable "public_key_path" {}
+variable "my_personal_ip" {}
+variable "access_ip" {}

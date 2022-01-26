@@ -1,11 +1,26 @@
 #--- compute/main.tf ---
 data "aws_ami" "server-ami" {
   most_recent = true
-  owners      = ["137112412989"]
+  owners      = ["amazon"]
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-kernel-5.10-hvm-2.0.20211223.0-x86_64-gp2"]
+    values = ["amzn2-ami-kernel-5.10-hvm-*-gp2"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
   }
 }
 
@@ -29,10 +44,10 @@ resource "aws_instance" "bu-node" {
   tags = {
     Name = "bu-node-${random_id.bu-node-id[count.index].dec}"
   }
-  key_name = aws_key_pair.bu-key.id
-  #  vpc_security_group_ids = [var.public_sg]
-  subnet_id = var.public_subnets[count.index]
-  user_data = templatefile(var.user_data_path, {})
+  key_name               = aws_key_pair.bu-key.id
+  vpc_security_group_ids = [var.public_sg]
+  subnet_id              = var.public_subnets[count.index]
+  user_data              = templatefile(var.user_data_path, {})
   root_block_device {
     volume_size = var.vol_size
   }
