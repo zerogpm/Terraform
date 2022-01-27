@@ -24,6 +24,13 @@ data "aws_ami" "server-ami" {
   }
 }
 
+data "aws_availability_zones" "bu-azones" {
+  filter {
+    name   = "opt-in-status"
+    values = ["opt-in-not-required"]
+  }
+}
+
 resource "random_id" "bu-node-id" {
   byte_length = 2
   count       = var.instance_count
