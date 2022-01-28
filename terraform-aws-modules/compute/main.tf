@@ -24,7 +24,7 @@ data "aws_ami" "server-ami" {
   }
 }
 
-data "aws_availability_zones" "bu-azones" {
+data "aws_availability_zones" "bu-zones" {
   filter {
     name   = "opt-in-status"
     values = ["opt-in-not-required"]
