@@ -1,3 +1,10 @@
+data "aws_availability_zones" "bu-zones" {
+  filter {
+    name   = "opt-in-status"
+    values = ["opt-in-not-required"]
+  }
+}
+
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.11.3"
@@ -5,7 +12,7 @@ module "vpc" {
   name = "vpc-dev"
   cidr = var.vpc_cider
 
-  azs             = ["us-east-1a", "us-east-1b"]
+  azs             = data.aws_availability_zones.bu-zones.names
   private_subnets = var.private_subnets
   public_subnets  = var.public_subnets
 

@@ -10,7 +10,7 @@ module "custom-vpc" {
 
 module "compute" {
   source          = "./compute"
-  instance_count  = 1
+  instance_count  = 2
   key_name        = "remote-key"
   public_subnets  = module.custom-vpc.public_subnets
   public_key_path = var.public_key_path
