@@ -40,5 +40,17 @@ locals {
         }
       }
     }
+    bastion_host = {
+      name        = "bastion_sg"
+      description = "bastion access"
+      ingress = {
+        bastion = {
+          from        = 3306
+          to          = 3306
+          protocol    = "tcp"
+          cidr_blocks = [local.vpc_cider]
+        }
+      }
+    }
   }
 }
