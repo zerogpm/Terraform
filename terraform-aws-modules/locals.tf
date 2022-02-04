@@ -45,10 +45,10 @@ locals {
       description = "bastion access"
       ingress = {
         bastion = {
-          from        = 3306
-          to          = 3306
+          from        = 22
+          to          = 22
           protocol    = "tcp"
-          cidr_blocks = [local.vpc_cider]
+          cidr_blocks = [var.access_ip]
         }
       }
     }
