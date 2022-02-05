@@ -28,6 +28,24 @@ locals {
         }
       }
     }
+    private = {
+      name        = "private_sg"
+      description = "security group for private Access"
+      ingress = {
+        ssh = {
+          from        = 22
+          to          = 22
+          protocol    = "tcp"
+          cidr_blocks = [local.vpc_cider]
+        }
+        http = {
+          from        = 80
+          to          = 80
+          protocol    = "tcp"
+          cidr_blocks = [local.vpc_cider]
+        }
+      }
+    }
     rds = {
       name        = "rds_sg"
       description = "RDS access"
