@@ -24,7 +24,16 @@ module "bastion-host" {
   source = "./bastion"
   instance_type = "t3.micro"
   key_name = "remote-key"
-  public_key_path = var.public_key_path
   public_subnets = module.custom-vpc.public_subnets
   public_sg = module.custom-vpc.bastion_sg
+}
+
+module "private-ec2" {
+  source = "./private-ec2"
+  instance_type = "t3.micro"
+  key_name = "remote-key"
+  private_subnets = module.custom-vpc.private_subnets
+  private_sg = module.custom-vpc.private_sg
+  user_data_path  = "${path.root}/userdata.tpl"
+  vpc = module.custom-vpc
 }
