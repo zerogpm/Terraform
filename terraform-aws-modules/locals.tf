@@ -66,7 +66,7 @@ locals {
           from        = 22
           to          = 22
           protocol    = "tcp"
-          cidr_blocks = [var.access_ip]
+          cidr_blocks = [var.my_personal_ip]
         }
       }
     }

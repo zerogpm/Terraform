@@ -19,3 +19,12 @@ module "compute" {
   user_data_path  = "${path.root}/userdata.tpl"
   public_sg       = module.custom-vpc.public_sg
 }
+
+module "bastion-host" {
+  source = "./bastion"
+  instance_type = "t3.micro"
+  key_name = "remote-key"
+  public_key_path = var.public_key_path
+  public_subnets = module.custom-vpc.public_subnets
+  public_sg = module.custom-vpc.bastion_sg
+}
