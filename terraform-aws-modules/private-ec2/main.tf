@@ -23,16 +23,17 @@ data "aws_ami" "server-ami" {
   }
 }
 
+
 module "ec2-instance-private" {
   depends_on = [var.vpc]
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "3.4.0"
-  for_each = toset(["0", "1"])
-  name = "private_ec2-vm-${each.key}"
+  count = var.instance_count
+  name = "private_ec2-vm"
   instance_type = var.instance_type
   key_name = var.key_name
   ami = data.aws_ami.server-ami.id
   vpc_security_group_ids  = [var.private_sg]
   user_data = templatefile(var.user_data_path, {})
-  subnet_id = element(var.private_subnets, tonumber(each.key))
+  subnet_id = var.private_subnets[count.index]
 }

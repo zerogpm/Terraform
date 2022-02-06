@@ -31,6 +31,7 @@ module "bastion-host" {
 module "private-ec2" {
   source = "./private-ec2"
   instance_type = "t3.micro"
+  instance_count = 2
   key_name = "remote-key"
   private_subnets = module.custom-vpc.private_subnets
   private_sg = module.custom-vpc.private_sg
