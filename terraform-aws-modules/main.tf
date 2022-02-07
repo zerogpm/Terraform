@@ -8,17 +8,23 @@ module "custom-vpc" {
   security_groups = local.security_group
 }
 
-module "compute" {
-  source          = "./compute"
-  instance_count  = 2
-  key_name        = "remote-key"
-  public_subnets  = module.custom-vpc.public_subnets
+module "ec2-key-chain" {
+  source = "./ec2-key-chain"
+  key_name = "remote-key"
   public_key_path = var.public_key_path
-  instance_type   = "t3.micro"
-  vol_size        = 10
-  user_data_path  = "${path.root}/userdata.tpl"
-  public_sg       = module.custom-vpc.public_sg
 }
+
+#module "compute" {
+#  source          = "./compute"
+#  instance_count  = 1
+#  key_name = "remote-key"
+#  key_id = module.ec2-key-chain.key-id
+#  public_subnets  = module.custom-vpc.public_subnets
+#  instance_type   = "t3.micro"
+#  vol_size        = 10
+#  user_data_path  = "${path.root}/userdata.tpl"
+#  public_sg       = module.custom-vpc.public_sg
+#}
 
 module "bastion-host" {
   source = "./bastion"
