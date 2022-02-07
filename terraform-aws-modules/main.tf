@@ -26,6 +26,7 @@ module "bastion-host" {
   key_name = "remote-key"
   public_subnets = module.custom-vpc.public_subnets
   public_sg = module.custom-vpc.bastion_sg
+  vpc = module.custom-vpc
 }
 
 module "private-ec2" {

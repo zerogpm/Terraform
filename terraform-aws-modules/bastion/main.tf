@@ -33,3 +33,12 @@ module "ec2-instance" {
   subnet_id = var.public_subnets[0]
   vpc_security_group_ids  = [var.public_sg]
 }
+
+resource "aws_eip" "bastion-eip" {
+  depends_on = [
+    module.ec2-instance,
+    var.vpc
+  ]
+  instance = module.ec2-instance.id
+  vpc = true
+}
