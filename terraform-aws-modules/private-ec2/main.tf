@@ -34,6 +34,9 @@ module "ec2-instance-private" {
   key_name               = var.key_name
   ami                    = data.aws_ami.server-ami.id
   vpc_security_group_ids = [var.private_sg]
-  user_data              = templatefile(var.user_data_path, {})
-  subnet_id              = var.private_subnets[count.index]
+  user_data = templatefile(var.user_data_path, {
+    app-name   = "LOL",
+    app-number = "app1"
+  })
+  subnet_id = var.private_subnets[count.index]
 }

@@ -50,6 +50,6 @@ module "application-load-balancer" {
   source          = "./application-load-balancer"
   vpc_id          = module.custom-vpc.vpc_id
   security_groups = module.custom-vpc.alb_public_sg
-  subnets = module.custom-vpc.public_subnets
+  subnets         = module.custom-vpc.public_subnets
   private_ec2_ids = module.private-ec2.private_ec2_ids
 }

@@ -6,7 +6,7 @@ module "alb" {
   load_balancer_type = "application"
   vpc_id             = var.vpc_id
   security_groups    = [var.security_groups]
-  subnets = var.subnets
+  subnets            = var.subnets
 
   #listener
   http_tcp_listeners = [
@@ -37,17 +37,17 @@ module "alb" {
         matcher             = "200-399"
       }
       protocol_version = "HTTP1"
-       # App1 Target Group - Targets
-       targets = {
-         my_app1_vm1 = {
-           target_id = var.private_ec2_ids[0]
-           port      = 80
-         },
-         my_app1_vm2 = {
-           target_id = var.private_ec2_ids[1]
-           port      = 80
-         }
-       }
+      # App1 Target Group - Targets
+      targets = {
+        my_app1_vm1 = {
+          target_id = var.private_ec2_ids[0]
+          port      = 80
+        },
+        my_app1_vm2 = {
+          target_id = var.private_ec2_ids[1]
+          port      = 80
+        }
+      }
     }
   ]
 }
