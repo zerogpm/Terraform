@@ -24,14 +24,14 @@ data "aws_ami" "server-ami" {
 }
 
 module "ec2-instance" {
-  source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "3.4.0"
-  name = "bastion-host"
-  instance_type = var.instance_type
-  key_name = var.key_name
-  ami = data.aws_ami.server-ami.id
-  subnet_id = var.public_subnets[0]
-  vpc_security_group_ids  = [var.public_sg]
+  source                 = "terraform-aws-modules/ec2-instance/aws"
+  version                = "3.4.0"
+  name                   = "bastion-host"
+  instance_type          = var.instance_type
+  key_name               = var.key_name
+  ami                    = data.aws_ami.server-ami.id
+  subnet_id              = var.public_subnets[0]
+  vpc_security_group_ids = [var.public_sg]
 }
 
 resource "aws_eip" "bastion-eip" {
@@ -40,5 +40,5 @@ resource "aws_eip" "bastion-eip" {
     var.vpc
   ]
   instance = module.ec2-instance.id
-  vpc = true
+  vpc      = true
 }

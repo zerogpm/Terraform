@@ -9,8 +9,8 @@ module "custom-vpc" {
 }
 
 module "ec2-key-chain" {
-  source = "./ec2-key-chain"
-  key_name = "remote-key"
+  source          = "./ec2-key-chain"
+  key_name        = "remote-key"
   public_key_path = var.public_key_path
 }
 
@@ -26,22 +26,30 @@ module "ec2-key-chain" {
 #  public_sg       = module.custom-vpc.public_sg
 #}
 
-module "bastion-host" {
-  source = "./bastion"
-  instance_type = "t3.micro"
-  key_name = "remote-key"
-  public_subnets = module.custom-vpc.public_subnets
-  public_sg = module.custom-vpc.bastion_sg
-  vpc = module.custom-vpc
-}
+#module "bastion-host" {
+#  source         = "./bastion"
+#  instance_type  = "t3.micro"
+#  key_name       = "remote-key"
+#  public_subnets = module.custom-vpc.public_subnets
+#  public_sg      = module.custom-vpc.bastion_sg
+#  vpc            = module.custom-vpc
+#}
 
 module "private-ec2" {
-  source = "./private-ec2"
-  instance_type = "t3.micro"
-  instance_count = 2
-  key_name = "remote-key"
+  source          = "./private-ec2"
+  instance_type   = "t3.micro"
+  instance_count  = 2
+  key_name        = "remote-key"
   private_subnets = module.custom-vpc.private_subnets
-  private_sg = module.custom-vpc.private_sg
+  private_sg      = module.custom-vpc.private_sg
   user_data_path  = "${path.root}/userdata.tpl"
-  vpc = module.custom-vpc
+  vpc             = module.custom-vpc
+}
+
+module "application-load-balancer" {
+  source          = "./application-load-balancer"
+  vpc_id          = module.custom-vpc.vpc_id
+  security_groups = module.custom-vpc.alb_public_sg
+  subnets = module.custom-vpc.public_subnets
+  private_ec2_ids = module.private-ec2.private_ec2_ids
 }

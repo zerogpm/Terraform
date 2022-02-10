@@ -21,3 +21,7 @@ output "private_sg" {
 output "bastion_sg" {
   value = aws_security_group.bu_sg["bastion_host"].id
 }
+
+output "alb_public_sg" {
+  value = aws_security_group.bu_sg["alb"].id
+}

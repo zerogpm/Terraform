@@ -28,6 +28,18 @@ locals {
         }
       }
     }
+    alb = {
+      name        = "public_alb_sg"
+      description = "security group for alb public Access"
+      ingress = {
+        http = {
+          from        = 80
+          to          = 80
+          protocol    = "tcp"
+          cidr_blocks = [var.access_ip]
+        }
+      }
+    }
     private = {
       name        = "private_sg"
       description = "security group for private Access"
