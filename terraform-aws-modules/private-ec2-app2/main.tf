@@ -32,19 +32,19 @@ resource "random_id" "bu-node-id" {
 }
 
 
-module "ec2-instance-private" {
+module "ec2-instance-private-app2" {
   depends_on             = [var.vpc]
   source                 = "terraform-aws-modules/ec2-instance/aws"
   version                = "3.4.0"
   count                  = var.instance_count
-  name                   = "private_ec2-vm-app1-${random_id.bu-node-id[count.index].dec}"
+  name                   = "private_ec2-vm-app2-${random_id.bu-node-id[count.index].dec}"
   instance_type          = var.instance_type
   key_name               = var.key_name
   ami                    = data.aws_ami.server-ami.id
   vpc_security_group_ids = [var.private_sg]
   user_data = templatefile(var.user_data_path, {
     app-name   = "LOL",
-    app-number = "app1"
+    app-number = "app2"
   })
   subnet_id = var.private_subnets[count.index]
 
