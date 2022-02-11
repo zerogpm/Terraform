@@ -38,6 +38,12 @@ locals {
           protocol    = "tcp"
           cidr_blocks = [var.access_ip]
         }
+        https = {
+          from        = 443
+          to          = 443
+          protocol    = "tcp"
+          cidr_blocks = [var.access_ip]
+        }
       }
     }
     private = {

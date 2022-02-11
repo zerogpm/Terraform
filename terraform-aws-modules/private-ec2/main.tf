@@ -23,13 +23,21 @@ data "aws_ami" "server-ami" {
   }
 }
 
+resource "random_id" "bu-node-id" {
+  byte_length = 2
+  count       = var.instance_count
+  keepers = {
+    key_name = var.key_name
+  }
+}
+
 
 module "ec2-instance-private" {
   depends_on             = [var.vpc]
   source                 = "terraform-aws-modules/ec2-instance/aws"
   version                = "3.4.0"
   count                  = var.instance_count
-  name                   = "private_ec2-vm"
+  name                   = "private_ec2-vm-${random_id.bu-node-id[count.index].dec}"
   instance_type          = var.instance_type
   key_name               = var.key_name
   ami                    = data.aws_ami.server-ami.id
@@ -39,4 +47,9 @@ module "ec2-instance-private" {
     app-number = "app1"
   })
   subnet_id = var.private_subnets[count.index]
+
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+  }
 }
