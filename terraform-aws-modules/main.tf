@@ -47,7 +47,7 @@ module "private-ec2" {
 }
 
 module "private-ec2-app2" {
-  source = "./private-ec2-app2"
+  source          = "./private-ec2-app2"
   instance_type   = "t3.micro"
   instance_count  = 2
   key_name        = "remote-key"
@@ -63,4 +63,15 @@ module "application-load-balancer" {
   security_groups = module.custom-vpc.alb_public_sg
   subnets         = module.custom-vpc.public_subnets
   private_ec2_ids = module.private-ec2.private_ec2_ids
+}
+
+module "route-53" {
+  source = "./route-53"
+  domain = "devopeasyway.com"
+}
+
+module "acm" {
+  source = "./acm"
+  zone_name = module.route-53.mydomain_name
+  zone_id = module.route-53.mydomain_zone_id
 }
