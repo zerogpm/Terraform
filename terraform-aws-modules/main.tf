@@ -58,11 +58,13 @@ module "private-ec2-app2" {
 }
 
 module "application-load-balancer" {
-  source          = "./application-load-balancer"
-  vpc_id          = module.custom-vpc.vpc_id
-  security_groups = module.custom-vpc.alb_public_sg
-  subnets         = module.custom-vpc.public_subnets
-  private_ec2_ids = module.private-ec2.private_ec2_ids
+  source               = "./application-load-balancer"
+  vpc_id               = module.custom-vpc.vpc_id
+  security_groups      = module.custom-vpc.alb_public_sg
+  subnets              = module.custom-vpc.public_subnets
+  private_ec2_ids      = module.private-ec2.private_ec2_ids
+  private_ec2_app2_ids = module.private-ec2-app2.private_ec2_app2_ids
+  acm_arn              = module.acm.this_acm_certificate_arn
 }
 
 module "route-53" {
@@ -71,7 +73,7 @@ module "route-53" {
 }
 
 module "acm" {
-  source = "./acm"
+  source    = "./acm"
   zone_name = module.route-53.mydomain_name
-  zone_id = module.route-53.mydomain_zone_id
+  zone_id   = module.route-53.mydomain_zone_id
 }
