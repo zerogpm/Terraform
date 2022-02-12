@@ -70,6 +70,8 @@ module "application-load-balancer" {
 module "route-53" {
   source = "./route-53"
   domain = "devopeasyway.com"
+  alb_dns = module.application-load-balancer.this_lb_dns_name
+  alb_zone_id = module.application-load-balancer.this_lb_zone_id
 }
 
 module "acm" {
