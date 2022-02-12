@@ -102,4 +102,34 @@ module "alb" {
       }
     }
   ]
+
+  # HTTPS Listener Rules
+  https_listener_rules = [
+    # Rule-1: /app1* should go to App1 EC2 Instances
+    {
+      https_listener_index = 0
+      actions = [
+        {
+          type               = "forward"
+          target_group_index = 0
+        }
+      ]
+      conditions = [{
+        path_patterns = ["/app1*"]
+      }]
+    },
+    # Rule-2: /app2* should go to App2 EC2 Instances
+    {
+      https_listener_index = 0
+      actions = [
+        {
+          type               = "forward"
+          target_group_index = 1
+        }
+      ]
+      conditions = [{
+        path_patterns = ["/app2*"]
+      }]
+    }
+  ]
 }
