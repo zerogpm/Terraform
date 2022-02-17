@@ -5,3 +5,20 @@ module "custom-vpc" {
   private_subnets = [for i in range(101, 103, 1) : cidrsubnet("10.0.0.0/16", 8, i)]
   security_groups = local.security_group
 }
+
+module "ec2-key-chain" {
+  source = "./ec2-key-chain"
+  key_name        = "remote-key"
+  public_key_path = var.public_key_path
+}
+
+module "jenkin-ec2" {
+  source = "./jenkin-ec2"
+  instance_type   = "t3.micro"
+  instance_count  = 1
+  key_name        = "remote-key"
+  public_subnets = module.custom-vpc.public_subnets
+  public_sg      = module.custom-vpc.public_sg
+  user_data_path  = "${path.root}/userdata.tpl"
+  vpc             = module.custom-vpc
+}
