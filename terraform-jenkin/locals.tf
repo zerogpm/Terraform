@@ -1,7 +1,7 @@
 #--- root/local.tf
 
 locals {
-  vpc_cidr = "10.123.0.0/16"
+  vpc_cidr = "10.0.0.0/16"
 }
 
 locals {
@@ -17,8 +17,8 @@ locals {
           cidr_blocks = [var.my_personal_ip]
         }
         http = {
-          from        = 80
-          to          = 80
+          from        = 8080
+          to          = 8080
           protocol    = "tcp"
           cidr_blocks = [var.access_ip]
         }
