@@ -1,3 +1,5 @@
+#---jenkin-ec2/main.tf---#
+
 data "aws_ami" "server-ami" {
   most_recent = true
   owners      = ["099720109477"]
