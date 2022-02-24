@@ -7,5 +7,5 @@ module "custom-vpc" {
 }
 
 module "bastion" {
-  source = "./b"
+  source = "./bastion-host"
 }
