@@ -8,4 +8,7 @@ module "custom-vpc" {
 
 module "bastion" {
   source = "./bastion-host"
+  datasource-ami = data.aws_ami.amzlinux2.id
+  instance_type = "t3.micro"
+  instance_keypair = "remote-key"
 }
