@@ -5,3 +5,4 @@ variable "public_sg" {}
 variable "vpc" {}
 variable "user_data_path" {}
 variable "instance_count" {}
+variable "host_name" {}

@@ -22,7 +22,7 @@ module "ec2-instance" {
   source                 = "terraform-aws-modules/ec2-instance/aws"
   version                = "3.4.0"
   count = var.instance_count
-  name                   = "jenkin-host-${random_id.bu-node-id[count.index].dec}"
+  name                   = "${var.host_name}-${random_id.bu-node-id[count.index].dec}"
   instance_type          = var.instance_type
   key_name               = var.key_name
   ami                    = data.aws_ami.server-ami.id
