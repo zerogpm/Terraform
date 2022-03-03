@@ -34,3 +34,14 @@ module "ansible-ec2" {
   user_data_path  = "${path.root}/userdata.tpl"
   vpc             = module.custom-vpc
 }
+
+module "centos-ec2" {
+  source = "./centos-ec2"
+  instance_type   = "t3.micro"
+  host_name = "centos"
+  instance_count  = 1
+  key_name        = "remote-key"
+  public_subnets = module.custom-vpc.public_subnets
+  public_sg      = module.custom-vpc.public_sg
+  vpc             = module.custom-vpc
+}
