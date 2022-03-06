@@ -23,8 +23,8 @@ locals {
           cidr_blocks = [var.access_ip]
         }
         nginx = {
-          from        = 8000
-          to          = 8000
+          from        = 80
+          to          = 80
           protocol    = "tcp"
           cidr_blocks = [var.access_ip]
         }

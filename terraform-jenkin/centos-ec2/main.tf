@@ -4,7 +4,7 @@ data "aws_ami" "centos-ami" {
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm-*-gp2"]
+    values = ["aws-parallelcluster-2.0.0-centos7-hvm-201811120751"]
   }
 }
 
