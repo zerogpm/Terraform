@@ -12,21 +12,10 @@ module "ec2-key-chain" {
   public_key_path = var.public_key_path
 }
 
-#module "jenkin-ec2" {
-#  source = "./jenkin-ec2"
-#  instance_type   = "t3.micro"
-#  instance_count  = 1
-#  key_name        = "remote-key"
-#  public_subnets = module.custom-vpc.public_subnets
-#  public_sg      = module.custom-vpc.public_sg
-#  user_data_path  = "${path.root}/userdata.tpl"
-#  vpc             = module.custom-vpc
-#}
-
-module "ansible-ec2" {
+module "jenkin-ec2" {
   source = "./jenkin-ec2"
   instance_type   = "t3.micro"
-  host_name = "ansible"
+  host_name = "jenkins"
   instance_count  = 1
   key_name        = "remote-key"
   public_subnets = module.custom-vpc.public_subnets
@@ -35,13 +24,25 @@ module "ansible-ec2" {
   vpc             = module.custom-vpc
 }
 
-module "centos-ec2" {
-  source = "./centos-ec2"
-  instance_type   = "t3.micro"
-  host_name = "centos"
-  instance_count  = 1
-  key_name        = "remote-key"
-  public_subnets = module.custom-vpc.public_subnets
-  public_sg      = module.custom-vpc.public_sg
-  vpc             = module.custom-vpc
-}
+#module "ansible-ec2" {
+#  source = "./jenkin-ec2"
+#  instance_type   = "t3.micro"
+#  host_name = "ansible"
+#  instance_count  = 1
+#  key_name        = "remote-key"
+#  public_subnets = module.custom-vpc.public_subnets
+#  public_sg      = module.custom-vpc.public_sg
+#  user_data_path  = "${path.root}/userdata.tpl"
+#  vpc             = module.custom-vpc
+#}
+
+#module "centos-ec2" {
+#  source = "./centos-ec2"
+#  instance_type   = "t3.micro"
+#  host_name = "centos"
+#  instance_count  = 1
+#  key_name        = "remote-key"
+#  public_subnets = module.custom-vpc.public_subnets
+#  public_sg      = module.custom-vpc.public_sg
+#  vpc             = module.custom-vpc
+#}

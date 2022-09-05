@@ -12,4 +12,6 @@ sudo apt install python3 -y
 
 sudo apt install python3-pip -y
 
-sudo python3 -m pip install ansible
+#sudo python3 -m pip install ansible
+
+sudo apt-get install git
