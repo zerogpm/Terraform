@@ -17,5 +17,5 @@ provider "azurerm" {
 # Create Resource Group 
 resource "azurerm_resource_group" "terraform-resource-group-01" {
   location = "Canada Central"
-  name = "terrafrom-resouce-group"  
+  name = "terrafrom-resource-group"  
 }
