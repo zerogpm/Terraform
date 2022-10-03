@@ -39,9 +39,9 @@ resource "azurerm_linux_virtual_machine" "bastion_host_linuxvm" {
     storage_account_type = "Standard_LRS"
   }
   source_image_reference {
-    publisher = "RedHat"
-    offer = "RHEL"
-    sku = "83-gen2"
-    version = "latest"
+    publisher = "Canonical"
+    offer = "0001-com-ubuntu-server-focal"
+    sku = "20_04-lts-gen2"
+    version = "20.04.202106030"
   }
 }
