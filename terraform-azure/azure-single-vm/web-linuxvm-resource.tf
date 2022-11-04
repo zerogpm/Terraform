@@ -61,4 +61,8 @@ resource "azurerm_virtual_machine_data_disk_attachment" "disk_attachment" {
   virtual_machine_id = azurerm_linux_virtual_machine.web_linuxvm.id
   lun                = "10"
   caching            = "ReadWrite"
+  depends_on = [
+    azurerm_linux_virtual_machine.web_linuxvm
+  ]
 }
+
