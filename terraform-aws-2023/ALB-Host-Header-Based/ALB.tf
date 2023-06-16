@@ -121,7 +121,7 @@ module "alb" {
         }
       ]
       conditions = [{
-        path_patterns = ["/app1*"]
+        host_headers = [var.app1_dns_name]
       }]
     },
     # Rule-2: /app2* should go to App2 EC2 Instances    
@@ -134,7 +134,7 @@ module "alb" {
         }
       ]
       conditions = [{
-        path_patterns = ["/app2*"]
+        host_headers = [var.app2_dns_name]
       }]
     },    
   ]
