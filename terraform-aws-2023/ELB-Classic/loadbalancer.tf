@@ -4,7 +4,7 @@ module "elb" {
   version = "4.0.1"
   # insert the 4 required variables here
   name = "${local.name}-myelb"
-  subnets         = [
+  subnets = [
     module.vpc.public_subnets[0],
     module.vpc.public_subnets[1]
   ]
@@ -37,5 +37,5 @@ module "elb" {
   # ELB attachments
   number_of_instances = var.private_instance_count
   instances           = [for ec2private in module.ec2_private : ec2private.id]
-  tags = local.common_tags
+  tags                = local.common_tags
 }
