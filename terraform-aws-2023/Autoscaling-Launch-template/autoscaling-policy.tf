@@ -4,7 +4,7 @@
 resource "aws_autoscaling_policy" "avg_cpu_policy_greater_than_xx" {
   name                      = "avg-cpu-policy-greater-than-xx"
   policy_type               = "TargetTrackingScaling" # Important Note: The policy type, either "SimpleScaling", "StepScaling" or "TargetTrackingScaling". If this value isn't provided, AWS will default to "SimpleScaling."    
-  autoscaling_group_name    = module.autoscaling.autoscaling_group_id
+  autoscaling_group_name    = aws_autoscaling_group.my_asg.id
   estimated_instance_warmup = 180 # defaults to ASG default cooldown 300 seconds if not set
   # CPU Utilization is above 50
   target_tracking_configuration {
@@ -20,7 +20,7 @@ resource "aws_autoscaling_policy" "avg_cpu_policy_greater_than_xx" {
 resource "aws_autoscaling_policy" "alb_target_requests_greater_than_yy" {
   name                      = "alb-target-requests-greater-than-yy"
   policy_type               = "TargetTrackingScaling" # Important Note: The policy type, either "SimpleScaling", "StepScaling" or "TargetTrackingScaling". If this value isn't provided, AWS will default to "SimpleScaling."    
-  autoscaling_group_name    = module.autoscaling.autoscaling_group_id
+  autoscaling_group_name    = aws_autoscaling_group.my_asg.id
   estimated_instance_warmup = 120 # defaults to ASG default cooldown 300 seconds if not set  
   # Number of requests > 10 completed per target in an Application Load Balancer target group.
   target_tracking_configuration {
