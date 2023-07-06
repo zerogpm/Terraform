@@ -8,5 +8,5 @@ variable "naked_app_dns_name" {
 variable "nlb_dns_name" {
   description = "App DNS Name"
   type        = string
-  default     = "nlb.devopeasyway.com"
+  default     = "cloudwatch.devopeasyway.com"
 }
