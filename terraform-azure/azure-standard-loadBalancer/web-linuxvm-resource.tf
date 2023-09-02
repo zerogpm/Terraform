@@ -32,7 +32,7 @@ resource "azurerm_linux_virtual_machine" "web_linuxvm" {
   #network_interface_ids = [ azurerm_network_interface.web_linuxvm_nic.id ]
   admin_ssh_key {
     username = "azureuser"
-    public_key = file("~/.ssh/remote-key.pub")
+    public_key = file("~/.ssh/id_rsa.pub")
   }
   os_disk {
     caching = "ReadWrite"
