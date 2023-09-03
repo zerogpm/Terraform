@@ -4,7 +4,7 @@
 variable "web_linuxvm_instance_count" {
   description = "Web Linux VM Instance Count"
   type = number 
-  default = 1
+  default = 2
 }
 
 # Web LB Inbout NAT Port for All VMs
