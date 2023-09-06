@@ -5,9 +5,9 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
   resource_group_name   = azurerm_resource_group.rg.name
   location              = azurerm_resource_group.rg.location
   sku                   = "Standard_DS1_v2"
-  instances             = 1
+  instances             = 2
   admin_username        = "azureuser"
-  #network_interface_ids = [ azurerm_network_interface.web_linuxvm_nic.id ]
+
   admin_ssh_key {
     username   = "azureuser"
     public_key = file("~/.ssh/id_rsa.pub")
@@ -37,6 +37,13 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
       subnet_id = azurerm_subnet.websubnet.id
       load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.web_lb_backend_address_pool.id]
     }
+  }
+
+  data_disk {
+    storage_account_type = "Standard_LRS"
+    caching              = "ReadWrite"
+    disk_size_gb         = 10
+    lun                  = 10
   }
 }
 
