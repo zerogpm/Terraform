@@ -6,8 +6,8 @@ resource "azurerm_linux_virtual_machine" "web_linuxvm" {
   location              = azurerm_resource_group.rg.location
   size                  = "Standard_DS1_v2"
   admin_username        = "azureuser"
-  network_interface_ids = [ azurerm_network_interface.web_linuxvm_nic.id ]
-  
+  network_interface_ids = [azurerm_network_interface.web_linuxvm_nic.id]
+
   admin_ssh_key {
     username   = "azureuser"
     public_key = file("~/.ssh/id_rsa.pub")

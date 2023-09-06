@@ -7,7 +7,7 @@
 #   size                  = "Standard_DS1_v2"
 #   admin_username        = "azureuser"
 #   network_interface_ids = [ azurerm_network_interface.web_linuxvm_nic_2.id ]
-  
+
 #   admin_ssh_key {
 #     username   = "azureuser"
 #     public_key = file("~/.ssh/remote-key.pub")

@@ -1,13 +1,13 @@
 # Resource-1: Azure Resource Group
 resource "azurerm_resource_group" "myrg1" {
-  name = "myrg-1"
+  name     = "myrg-1"
   location = "Canada Central"
 }
 
 # Resource-2: Random String 
 resource "random_string" "myrandom" {
-  length = 16
-  upper = false 
+  length  = 16
+  upper   = false
   special = false
 }
 
