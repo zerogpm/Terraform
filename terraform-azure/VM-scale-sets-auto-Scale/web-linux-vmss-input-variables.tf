@@ -5,7 +5,7 @@ variable "web_vmss_nsg_inbound_ports" {
 }
 
 variable "web_monitor_autoscale_setting_email" {
-  description = "mon itoremail"
+  description = "email"
   type        = string
   default     = "test@gmail.com"
 }
