@@ -44,4 +44,5 @@ resource "azurerm_linux_virtual_machine" "bastion_host_linuxvm" {
     sku       = "20_04-lts-gen2"
     version   = "20.04.202106030"
   }
+  custom_data = filebase64("bastion-testing-tools.tpl")
 }
