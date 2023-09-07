@@ -46,22 +46,3 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
     lun                  = 10
   }
 }
-
-/* resource "azurerm_managed_disk" "extended_disk" {
-  for_each             = var.web_linuxvm_instance_count
-  name                 = "extned_disk-${each.key}"
-  resouxrce_group_name  = azurerm_resource_group.rg.name
-  location             = azurerm_resource_group.rg.location
-  storage_account_type = "Standard_LRS"
-  create_option        = "Empty"
-  disk_size_gb         = 40
-}
-
-resource "azurerm_virtual_machine_data_disk_attachment" "disk_attachement" {
-  for_each           = var.web_linuxvm_instance_count
-  managed_disk_id    = azurerm_managed_disk.extended_disk[each.key].id
-  virtual_machine_id = azurerm_linux_virtual_machine.web_linuxvm[each.key].id
-  lun                = "10"
-  caching            = "ReadWrite"
-  depends_on         = [azurerm_linux_virtual_machine_scale_set.web_vmss]
-} */
