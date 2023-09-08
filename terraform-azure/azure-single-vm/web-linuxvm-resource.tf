@@ -18,9 +18,9 @@ resource "azurerm_linux_virtual_machine" "web_linuxvm" {
   }
   source_image_reference {
     publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-focal"
-    sku       = "20_04-lts-gen2"
-    version   = "20.04.202106030"
+    offer     = "0001-com-ubuntu-server-jammy-daily"
+    sku       = "22_04-daily-lts-gen2"
+    version   = "22.04.202309030"
   }
   #custom_data = filebase64("${path.module}/app-scripts/redhat-webvm-script.sh")
   custom_data = filebase64("user-data.tpl")
