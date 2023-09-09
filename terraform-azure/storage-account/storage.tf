@@ -24,7 +24,7 @@ resource "azurerm_storage_container" "httpd_files_container" {
 
 # Locals Block with list of files to be uploaded
 locals {
-  httpd_conf_files = ["nginx.conf", "ubuntu.sh"]
+  httpd_conf_files = ["data.json", "default"]
 }
 # Resource-3: httpd conf files upload to httpd-files-container
 resource "azurerm_storage_blob" "httpd_files_container_blob" {
