@@ -43,7 +43,7 @@ resource "azurerm_linux_virtual_machine" "web_linuxvm" {
   custom_data = base64encode(local.webvm_custom_data)
 }
 
-/* resource "azurerm_managed_disk" "extended_disk" {
+ resource "azurerm_managed_disk" "extended_disk" {
   name                 = "extend_disk"
   location             = azurerm_resource_group.rg.location
   resource_group_name  = azurerm_resource_group.rg.name
@@ -60,5 +60,5 @@ resource "azurerm_virtual_machine_data_disk_attachment" "disk_attachment" {
   depends_on = [
     azurerm_linux_virtual_machine.web_linuxvm
   ]
-} */
+} 
 
