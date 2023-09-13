@@ -19,7 +19,7 @@ Resource: azurerm_monitor_autoscale_setting
     2. Scale-Up Rule: Decrease VMs by 1 when LB SYN Count is less than 10 Connections (Average)    
 */
 
-/* resource "azurerm_monitor_autoscale_setting" "web_vmss_autoscale" {
+ resource "azurerm_monitor_autoscale_setting" "web_vmss_autoscale" {
   name                = "${local.resource_name_prefix}-web-vmss-autoscale-profiles"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
@@ -29,7 +29,7 @@ Resource: azurerm_monitor_autoscale_setting
     email {
       send_to_subscription_administrator    = true
       send_to_subscription_co_administrator = true
-      custom_emails                         = []
+      custom_emails                         = [var.web_monitor_autoscale_setting_email]
     }
   }
   ################################################################################
@@ -180,5 +180,5 @@ Resource: azurerm_monitor_autoscale_setting
   } # End of Profile-1
 
 
-} */
+}
 
