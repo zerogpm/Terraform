@@ -19,3 +19,13 @@ variable "instance_keypair" {
   type        = string
   default     = "aws"
 }
+
+variable "availability_zone_map" {
+  description = "availability zone list"
+  type = map(string)
+  default = {
+    "us-east-1a" : "us-east-1a"
+    "us-east-1b" : "us-east-1b"
+    "us-east-1c" : "us-east-1c"
+  }
+}

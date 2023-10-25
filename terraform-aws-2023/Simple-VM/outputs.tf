@@ -3,11 +3,17 @@
 # EC2 Instance Public IP
 output "instance_publicip" {
   description = "EC2 Instance Public IP"
-  value       = aws_instance.myec2vm.public_ip
+  value       = { for k, v in aws_instance.myec2vm : k => v.public_ip }
 }
 
 # EC2 Instance Public DNS
 output "instance_publicdns" {
   description = "EC2 Instance Public DNS"
-  value       = aws_instance.myec2vm.public_dns
+  value       = {for k, v in aws_instance.myec2vm : k => v.public_dns}
+}
+
+# EC2 Instance Public DNS
+output "image-id" {
+  description = "EC2 Instance Public DNS"
+  value       = data.aws_ami.amzlinux2.id
 }
