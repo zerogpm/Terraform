@@ -11,6 +11,6 @@ resource "aws_instance" "myec2vm" {
   availability_zone = each.value
   user_data = templatefile("${path.root}/userdata.tpl", {})
   tags = {
-    "Name" = "EC2-Demo2"
+    "Name" = "EC2-Demo2-${each.value}"
   }
 }
